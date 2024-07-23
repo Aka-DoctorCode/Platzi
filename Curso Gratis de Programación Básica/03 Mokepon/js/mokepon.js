@@ -1,6 +1,10 @@
 // Variables globales
 let ataqueJugador;
 let ataqueEnemigo;
+let vidasJugador = 3;
+let vidasEnemigo = 3;
+let spanVidasJugador;
+let spanVidasEnemigo;
 
 // Funcion jugar
 function iniciarJuego() {
@@ -13,9 +17,13 @@ function iniciarJuego() {
 	botonAgua.addEventListener('click', ataqueAgua);
 	let botonTierra = document.getElementById('botonTierra');
 	botonTierra.addEventListener('click', ataqueTierra);
+
+	let botonReiniciar = document.getElementById('botonReiniciar');
+	botonReiniciar.addEventListener('click', reiniciarJuego);
 }
 // Funcion para seleccionar la mascota del jugador
 function seleccionarMascotaJugador() {
+	spanVidasJugador = document.getElementById('vidasJugador');
 	let hipodoge = document.getElementById('hipodoge');
 	let capipepo = document.getElementById('capipepo');
 	let ratigueya = document.getElementById('ratigueya');
@@ -41,10 +49,12 @@ function seleccionarMascotaJugador() {
 		alert('Por favor selecciona una mascota');
 	}
 	alert('Seleccionaste como tu mascota a: ' + spanMascotaJugador.innerHTML);
+	spanVidasJugador.innerHTML = vidasJugador;
 	seleccionarMascotaEnemigo();
 }
 // Funcion para seleccionar la mascota de la computadora
 function seleccionarMascotaEnemigo() {
+	spanVidasEnemigo = document.getElementById('vidasEnemigo');
 	// let mascotaEnemigo = aleatorio(1, 6);
 	let mascotaEnemigo = aleatorio(1, 3);
 
@@ -66,6 +76,13 @@ function seleccionarMascotaEnemigo() {
 		alert('ERROR');
 	}
 	alert('La mascota del enemiga es: ' + spanMascotaEnemigo.innerHTML);
+	spanVidasEnemigo.innerHTML = vidasEnemigo;
+
+	let mostrarAtaques = document.getElementById('seleccionar-ataque');
+	mostrarAtaques.hidden = false;
+
+	let mostrarReinicar = document.getElementById('reiniciar');
+	mostrarReinicar.style.display = 'none';
 }
 
 // Funciones de ataque del jugador
@@ -103,12 +120,30 @@ function combate() {
 		crearMensaje('EMPATE');
 	} else if (ataqueJugador == 'FUEGO' && ataqueEnemigo == 'TIERRA') {
 		crearMensaje('GANASTE');
+		vidasEnemigo--;
+		spanVidasEnemigo.innerHTML = vidasEnemigo;
 	} else if (ataqueJugador == 'AGUA' && ataqueEnemigo == 'FUEGO') {
 		crearMensaje('GANASTE');
+		vidasEnemigo--;
+		spanVidasEnemigo.innerHTML = vidasEnemigo;
 	} else if (ataqueJugador == 'TIERRA' && ataqueEnemigo == 'AGUA') {
 		crearMensaje('GANASTE');
+		vidasEnemigo--;
+		spanVidasEnemigo.innerHTML = vidasEnemigo;
 	} else {
 		crearMensaje('PERDISTE');
+		vidasJugador--;
+		spanVidasJugador.innerHTML = vidasJugador;
+	}
+	revisarVidas();
+}
+
+// Funcion revisar vidas
+function revisarVidas() {
+	if (vidasJugador == 0) {
+		mensajeFinal('PERDISTE');
+	} else if (vidasEnemigo == 0) {
+		mensajeFinal('GANASTE');
 	}
 }
 
@@ -126,6 +161,29 @@ function crearMensaje(resultado) {
 		resultado;
 
 	sectionMensajes.appendChild(parrafo);
+}
+
+function mensajeFinal(resultadoFinal) {
+	let sectionMensajes = document.getElementById('mensajes');
+
+	let parrafoFinal = document.createElement('h2');
+	parrafoFinal.innerHTML = resultadoFinal;
+
+	sectionMensajes.appendChild(parrafoFinal);
+
+	let botonFuego = document.getElementById('botonFuego');
+	botonFuego.disabled = true;
+	let botonAgua = document.getElementById('botonAgua');
+	botonAgua.disabled = true;
+	let botonTierra = document.getElementById('botonTierra');
+	botonTierra.disabled = true;
+
+	let mostrarReinicar = document.getElementById('reiniciar');
+	mostrarReinicar.style.display = 'block';
+}
+
+function reiniciarJuego() {
+	location.reload();
 }
 
 // Funcion para generar un numero aleatorio

@@ -1,0 +1,14 @@
+#titulo {
+    width: 185px;
+    height: 40px;
+}
+
+#seleccionar-mascota {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50vh;
+}
+
+.mascotaSelector {}
