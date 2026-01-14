@@ -1,14 +1,196 @@
-#titulo {
-    width: 185px;
-    height: 40px;
+:root {
+    --primary-color: #6c5ce7;
+    --bg-color: #1a1a2e;
+    --card-bg: #233463;
+    --card-bg-light: #FFFFFF1A;
+    --text-color: #eeeeee;
+    --text-color-dark: #111111;
+    --text-shadow-color: #111111;
+    --accent-fire: #ff7675;
+    --accent-water: #74b9ff;
+    --accent-earth: #55efc4;
+    --text-empate: #0000ff;
+    --text-ganaste: #00ff00;
+    --text-perdiste: #ff0000;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-y: scroll;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem;
+}
+
+section {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    margin-bottom: 2rem;
 }
 
 #seleccionar-mascota {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 50vh;
 }
 
-.mascotaSelector {}
+#titulo {
+    font-size: 3rem;
+    margin: 0.5rem;
+    text-shadow: 3px 6px 5px var(--text-shadow-color);
+}
+
+#contenedorSubtitulo {
+    background-color: var(--card-bg-light);
+    border-radius: 12px;
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
+    padding: 10px 25px;
+    box-shadow: 5px 5px 20px var(--text-shadow-color);
+}
+
+#subtitulo {
+    font-weight: 500;
+    opacity: 1;
+    font-size: 1.5rem;
+    text-shadow: 3px 3px 0px var(--text-shadow-color);
+    margin: 0;
+    padding: 0;
+}
+
+label {
+    background: var(--card-bg-light);
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+    transition: transform 0.2s, background 0.2s;
+    border: 1px solid transparent;
+    color: var(--text-color-dark);
+    font-weight: 900;
+    cursor: pointer;
+}
+
+label:hover {
+    transform: scale(1.1);
+    border: 3px solid var(--text-color);
+}
+
+label:has(input:checked) {
+    transform: scale(1.05);
+    border: 5px solid var(--primary-color);
+}
+
+label[for="hipodoge"] {background-color: var(--accent-water);}
+label[for="capipepo"] {background-color: var(--accent-fire);}
+label[for="ratigueya"] {background-color: var(--accent-earth);}
+
+input[type="radio"] {
+    accent-color: var(--primary-color);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+button:hover {
+    filter: brightness(1.2);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+#botonFuego { 
+    background-color: var(--accent-fire);
+    color: var(--text-color-dark);
+}
+
+#botonAgua { 
+    background-color: var(--accent-water); 
+    color: var(--text-color-dark);
+}
+
+#botonTierra { 
+    background-color: var(--accent-earth); 
+    color: var(--text-color-dark);
+}
+
+#botonFuego:hover{box-shadow: 0 0 20px var(--accent-fire)}
+#botonAgua:hover{box-shadow: 0 0 20px var(--accent-water)}
+#botonTierra:hover{box-shadow: 0 0 20px var(--accent-earth)}
+#EMPATE {color: var(--text-empate)}
+#GANASTE {color: var(--text-ganaste)}
+#PERDISTE {color: var(--text-perdiste)}
+
+#mensajes {
+    background: var(--card-bg-light);
+    box-shadow: none;
+    font-size: 1.2rem;
+    font-weight: 900;
+    padding: 1rem;
+    max-height: 70px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+span {
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+#FUEGO {color: var(--accent-fire);}
+#AGUA {color: var(--accent-water);}
+#TIERRA {color: var(--accent-earth);}
+
+#botonReiniciar {
+    width: 80%;
+    height: 75px;
+    background-color: var(--card-bg);
+    font-size: 2.5rem;
+    border-radius: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+#botonReiniciar:hover {
+    filter: brightness(1.2);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--text-color);
+}
+
+.tarjetas-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}

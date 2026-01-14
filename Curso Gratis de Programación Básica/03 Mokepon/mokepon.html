@@ -10,25 +10,21 @@
 <body>
     <section id="seleccionar-mascota">
         <h1 id="titulo" >Mokepon! 🔥💧🌱</h1>
-        <h2>Eligue a tu mascota:</h2>
-
-        <label class="mascotaSelector" for="hipodoge">Hipodoge -> Agua 💧</label>
-        <input type="radio" name="mascota" id="hipodoge"/>
+        <div id="contenedorSubtitulo">
+            <h2 id="subtitulo">Eligue a tu mascota:</h2>
+        </div>
+        <label for="hipodoge">Hipodoge 💧 <input type="radio" name="mascota" id="hipodoge"/></label>
+        <label for="capipepo">Capipepo 🔥 <input type="radio" name="mascota" id="capipepo"/></label>
+        <label for="ratigueya">Ratigueya 🌱 <input type="radio" name="mascota" id="ratigueya"/></label>
         
-        <label class="mascotaSelector" for="capipepo">Capipepo -> Fuego 🔥</label>
-        <input type="radio" name="mascota" id="capipepo"/>
-        
-        <label class="mascotaSelector" for="ratigueya">Ratigueya -> Tierra 🌱</label>
-        <input type="radio" name="mascota" id="ratigueya"/>
-        
-        <!-- <label class="mascotaSelector" for="langostelvis">Langostelvis -> Agua 💧 y Fuego 🔥</label>
-        <input type="radio" name="mascota" id="langostelvis"/>
-        
-        <label class="mascotaSelector" for="tucapalma">Tucapalma -> Agua 💧 y Tierra 🌱</label>
-        <input type="radio" name="mascota" id="tucapalma"/>
-        
-        <label class="mascotaSelector" for="pydos">Pydos -> Tierra 🌱 y Fuego 🔥</label> 
-        <input type="radio" name="mascota" id="pydos"/> -->
+        <!--
+            <label class="mascotaSelector" for="langostelvis">Langostelvis -> Agua 💧 y Fuego 🔥</label>
+            <input type="radio" name="mascota" id="langostelvis"/>
+            <label class="mascotaSelector" for="tucapalma">Tucapalma -> Agua 💧 y Tierra 🌱</label>
+            <input type="radio" name="mascota" id="tucapalma"/>
+            <label class="mascotaSelector" for="pydos">Pydos -> Tierra 🌱 y Fuego 🔥</label> 
+            <input type="radio" name="mascota" id="pydos"/>
+        -->
         
         <button id="botonMascota">Seleccionar</button>
     </section>
@@ -46,11 +42,8 @@
         </P>
     </section>
 
-    <section id="mensajes">
-    </section>
+    <section id="mensajes"></section>
 
-    <section id="reiniciar" hidden>
-        <button id="botonReiniciar">Reiniciar</button>
-    </section>
+    <button id="botonReiniciar">Reiniciar</button>
 </body>
 </html>

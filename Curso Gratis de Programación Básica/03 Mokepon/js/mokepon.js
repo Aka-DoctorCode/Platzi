@@ -20,6 +20,8 @@ function iniciarJuego() {
 
 	let botonReiniciar = document.getElementById('botonReiniciar');
 	botonReiniciar.addEventListener('click', reiniciarJuego);
+	let sectionMensajes = document.getElementById('mensajes');
+    sectionMensajes.style.display = 'none';
 }
 // Funcion para seleccionar la mascota del jugador
 function seleccionarMascotaJugador() {
@@ -151,23 +153,26 @@ function revisarVidas() {
 function crearMensaje(resultado) {
 	let sectionMensajes = document.getElementById('mensajes');
 
+	sectionMensajes.style.display = 'block';
+	
 	let parrafo = document.createElement('p');
 	parrafo.innerHTML =
 		'Tu mascota ataco con ' +
-		ataqueJugador +
+		`<span id='${ataqueJugador}'>${ataqueJugador}</span>` +
 		' y la mascota del enemigo ataco con ' +
-		ataqueEnemigo +
+		`<span id='${ataqueEnemigo}'>${ataqueEnemigo}</span>` +
 		' - ' +
-		resultado;
+		`<span id='${resultado}'>${resultado}</span>`;
 
 	sectionMensajes.appendChild(parrafo);
+	sectionMensajes.scrollTop = sectionMensajes.scrollHeight;
 }
 
 function mensajeFinal(resultadoFinal) {
 	let sectionMensajes = document.getElementById('mensajes');
 
 	let parrafoFinal = document.createElement('h2');
-	parrafoFinal.innerHTML = resultadoFinal;
+	parrafoFinal.innerHTML = `<span id='${resultadoFinal}'>${resultadoFinal}</span>`;
 
 	sectionMensajes.appendChild(parrafoFinal);
 
