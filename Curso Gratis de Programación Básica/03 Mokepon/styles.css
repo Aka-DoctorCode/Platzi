@@ -4,6 +4,7 @@
     --bg-color: #1a1a2e;
     --card-bg: #233463;
     --card-bg-light: #FFFFFF1A;
+    --card-shadow: #0000004d;
     --text-color: #eeeeee;
     --text-color-dark: #111111;
     --text-shadow-color: #111111;
@@ -34,7 +35,7 @@ section {
     background: var(--card-bg);
     padding: 2rem;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px var(--card-shadow);
     text-align: center;
     width: 90%;
     max-width: 500px;
@@ -115,16 +116,18 @@ input:checked+label.tarjetaDeMokepon {
     border: 5px solid var(--secondary-color);
 }
 
-label[for="hipodoge"] {
-    background-color: var(--accent-water);
-}
+label {
+    &[for="hipodoge"] {
+        background-color: var(--accent-water);
+    }
 
-label[for="capipepo"] {
-    background-color: var(--accent-earth);
-}
+    &[for="capipepo"] {
+        background-color: var(--accent-earth);
+    }
 
-label[for="ratigueya"] {
-    background-color: var(--accent-fire);
+    &[for="ratigueya"] {
+        background-color: var(--accent-fire);
+    }
 }
 
 img {
@@ -258,6 +261,13 @@ span {
 .ataquesJugador,
 .ataquesEnemigo {
     width: 50%;
+}
+
+#vidasJugador,
+#vidasEnemigo {
+    font-size: 2rem;
+    color: rgba(0, 255, 0, 1);
+    transition: color 0.3s ease;
 }
 
 .tarjetasContainer {
