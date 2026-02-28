@@ -2,14 +2,8 @@
 const sectionSeleccionarAtaque = document.getElementById('sectionSeleccionarAtaque')
 const sectionReiniciar = document.getElementById('sectionReiniciar')
 const botonMascotaJugador = document.getElementById('botonMascota')
-const botonFuego = document.getElementById('botonFuego')
-const botonAgua = document.getElementById('botonAgua')
-const botonTierra = document.getElementById('botonTierra')
 const botonReiniciar = document.getElementById('botonReiniciar')
 const sectionSeleccionarMascota = document.getElementById('sectionSeleccionarMascota')
-const inputHipodoge = document.getElementById('hipodoge')
-const inputCapipepo = document.getElementById('capipepo')
-const inputRatigueya = document.getElementById('ratigueya')
 const spanMascotaJugador = document.getElementById('mascotaJugador')
 const spanMascotaEnemigo = document.getElementById('mascotaEnemigo')
 const spanVidasJugador = document.getElementById('vidasJugador')
@@ -18,11 +12,22 @@ const sectionMensajes = document.getElementById('resultado')
 const ataquesDelJugador = document.getElementById('ataquesDelJugador')
 const ataquesDelEnemigo = document.getElementById('ataquesDelEnemigo')
 const contenedorTarjetas = document.getElementById('contenedorTarjetas')
+const contenedorAtaques = document.getElementById('contenedorAtaques')
 
 // --- Global Variables ---
 let mokepones = []
-let ataqueJugador
+let ataqueJugador = []
 let ataqueEnemigo
+let opcionDeMokepones
+let inputHipodoge
+let inputCapipepo
+let inputRatigueya
+let mascotaJugador
+let ataquesMokepon
+let botonFuego
+let botonAgua
+let botonTierra
+let botones = []
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -76,12 +81,12 @@ function iniciarJuego() {
                 <img src="${mokepone.foto}" alt="${mokepone.nombre}">
             </label>`
         contenedorTarjetas.innerHTML += opcionDeMokepones
+        inputHipodoge = document.getElementById('hipodoge')
+        inputCapipepo = document.getElementById('capipepo')
+        inputRatigueya = document.getElementById('ratigueya')
     })
     sectionReiniciar.style.display = 'none'
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
-    botonFuego.addEventListener('click', ataqueFuego)
-    botonAgua.addEventListener('click', ataqueAgua)
-    botonTierra.addEventListener('click', ataqueTierra)
     botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
@@ -90,42 +95,69 @@ function seleccionarMascotaJugador() {
     sectionSeleccionarMascota.style.display = 'none'
     sectionSeleccionarAtaque.style.display = 'flex'
     if (inputHipodoge.checked) {
-        spanMascotaJugador.innerHTML = 'Hipodoge'
+        spanMascotaJugador.innerHTML = inputHipodoge.id.charAt(0).toUpperCase() + inputHipodoge.id.slice(1)
+        mascotaJugador = inputHipodoge.id
     } else if (inputCapipepo.checked) {
-        spanMascotaJugador.innerHTML = 'Capipepo'
+        spanMascotaJugador.innerHTML = inputCapipepo.id.charAt(0).toUpperCase() + inputCapipepo.id.slice(1)
+        mascotaJugador = inputCapipepo.id
     } else if (inputRatigueya.checked) {
-        spanMascotaJugador.innerHTML = 'Ratigueya'
+        spanMascotaJugador.innerHTML = inputRatigueya.id.charAt(0).toUpperCase() + inputRatigueya.id.slice(1)
+        mascotaJugador = inputRatigueya.id
     } else {
         alert('Selecciona una mascota')
-        // Si no selecciona, recargamos para evitar errores de flujo
-        location.reload()
+        return;
     }
+    const ataques = extraerAtaques(mascotaJugador);
+    mostrarAtaques(ataques);
     seleccionarMascotaEnemigo()
 }
 
-function seleccionarMascotaEnemigo() {
-    let mascotaAleatoria = aleatorio(1, 3)
-    if (mascotaAleatoria == 1) {
-        spanMascotaEnemigo.innerHTML = 'Hipodoge'
-    } else if (mascotaAleatoria == 2) {
-        spanMascotaEnemigo.innerHTML = 'Capipepo'
-    } else {
-        spanMascotaEnemigo.innerHTML = 'Ratigueya'
+function extraerAtaques(mascotaJugador) {
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mascotaJugador === mokepones[i].nombre.toLowerCase()) {
+            return mokepones[i].ataques;
+        }
     }
+    return [];
 }
 
-// --- Combat Logic ---
-function ataqueFuego() {
-    ataqueJugador = 'FUEGO'
-    ataqueAleatorioEnemigo()
+function mostrarAtaques(ataques) {
+    contenedorAtaques.innerHTML = '';
+    ataques.forEach((ataques) => {
+        ataquesMokepon = `<button id="${ataques.id}" class="botonDeAtaque bAtaque">${ataques.nombre}</button>`
+
+        contenedorAtaques.innerHTML += ataquesMokepon
+    })
+    botonFuego = document.getElementById('botonFuego')
+    botonAgua = document.getElementById('botonAgua')
+    botonTierra = document.getElementById('botonTierra')
+    botones = document.querySelectorAll('.bAtaque')    
 }
-function ataqueAgua() {
-    ataqueJugador = 'AGUA'
-    ataqueAleatorioEnemigo()
+
+function secuenciaAtaque() {
+    botones.forEach((boton) => {
+        boton.addEventListener('click', (e) => {
+            if (e.target.textContent === 'Fuego 🔥') {
+                ataqueJugador.push('FUEGO')
+                console.log(ataqueJugador)
+                boton.style.background = '#293032ff' 
+            } else if (e.target.textContent === 'Agua 💧') {
+                ataqueJugador.push('AGUA')
+                console.log(ataqueJugador)
+                boton.style.background = '#293032ff' 
+            } else if (e.target.textContent === 'Tierra 🌱') {
+                ataqueJugador.push('TIERRA')
+                console.log(ataqueJugador)
+                boton.style.background = '#293032ff' 
+            } 
+        })
+    })
 }
-function ataqueTierra() {
-    ataqueJugador = 'TIERRA'
-    ataqueAleatorioEnemigo()
+
+function seleccionarMascotaEnemigo() {
+    let mascotaAleatoria = aleatorio(0, mokepones.length - 1)
+    spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre
+    secuenciaAtaque()
 }
 
 function ataqueAleatorioEnemigo() {
@@ -203,19 +235,19 @@ function actualizarColorVidas(elemento, valor) {
     let color;
     switch (valor) {
         case 3:
-            color = "rgba(0, 255, 0, 1)";   // Verde
+            color = "rgba(0, 255, 0, 1)";
             break;
         case 2:
-            color = "rgba(255, 255, 0, 1)"; // Amarillo
+            color = "rgba(255, 255, 0, 1)";
             break;
         case 1:
-            color = "rgba(255, 127, 0, 1)"; // Naranja
+            color = "rgba(255, 127, 0, 1)";
             break;
         case 0:
-            color = "rgba(255, 0, 0, 1)";   // Rojo
+            color = "rgba(255, 0, 0, 1)";
             break;
         default:
-            color = "rgba(255, 255, 255, 1)"; // Blanco por defecto
+            color = "rgba(255, 255, 255, 1)";
     }
     elemento.style.color = color;
 }
